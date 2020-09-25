@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.smallseaweed.me">
-  <title>Tag: 胡言乱语 | smallseaweedの博客</title>
+  <title>二分查找的时间复杂度及其不足 | smallseaweedの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="中国矿业大学大二在读">
-<meta property="og:type" content="website">
-<meta property="og:title" content="smallseaweedの博客">
-<meta property="og:url" content="http://blog.smallseaweed.me/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/index.html">
+  <meta name="description" content="从二分查找开始上一篇博客《从零开始的数据结构之向量》具体实现了基于有序向量的二分查找，即如下代码段：  12345678910111213template &lt;typename T&gt;Rank vector&lt;T&gt;::search(T const &amp; e,Rank lo,Rank hi)         &#x2F;&#x2F;二分查找 &amp;#123;int mi;while(lo&lt;hi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找的时间复杂度及其不足">
+<meta property="og:url" content="http://blog.smallseaweed.me/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/index.html">
 <meta property="og:site_name" content="smallseaweedの博客">
-<meta property="og:description" content="中国矿业大学大二在读">
+<meta property="og:description" content="从二分查找开始上一篇博客《从零开始的数据结构之向量》具体实现了基于有序向量的二分查找，即如下代码段：  12345678910111213template &lt;typename T&gt;Rank vector&lt;T&gt;::search(T const &amp; e,Rank lo,Rank hi)         &#x2F;&#x2F;二分查找 &amp;#123;int mi;while(lo&lt;hi">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-25T01:12:59.000Z">
+<meta property="article:modified_time" content="2020-09-25T09:54:33.355Z">
 <meta property="article:author" content="smallseaweed">
-<meta property="article:tag" content="CS, C++">
+<meta property="article:tag" content="-二分查找 -复杂度">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="smallseaweedの博客" type="application/atom+xml">
@@ -145,60 +147,161 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-二分查找的时间复杂度及其不足" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/08/%E5%86%99%E5%9C%A8%E5%BC%80%E5%A7%8B/" class="archive-article-date">
-  	<time datetime="2020-09-08T03:47:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/08/%E5%86%99%E5%9C%A8%E5%BC%80%E5%A7%8B/">写在开始</a>
+    <h1 class="article-title" itemprop="name">
+      二分查找的时间复杂度及其不足
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/" class="archive-article-date">
+  	<time datetime="2020-09-25T01:12:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从二分查找开始"><a href="#从二分查找开始" class="headerlink" title="从二分查找开始"></a>从二分查找开始</h1><p>上一篇博客<a href="">《从零开始的数据结构之向量》</a>具体实现了基于有序向量的二分查找，即如下代码段：</p>
+<blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Rank <span class="built_in">vector</span>&lt;T&gt;::search(T <span class="keyword">const</span> &amp; e,Rank lo,Rank hi)         <span class="comment">//二分查找 </span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> mi;</span><br><span class="line"><span class="keyword">while</span>(lo&lt;hi)                                            <span class="comment">//将递归改为迭代 </span></span><br><span class="line">&#123;</span><br><span class="line">	mi=(lo+hi)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(e&lt;_elem[mi]) hi=mi;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(e&gt;_elem[mi]) lo=mi+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> mi;</span><br><span class="line"> &#125; </span><br><span class="line"> <span class="keyword">return</span> <span class="number">-1</span>;                                            <span class="comment">//查找失败 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在以上查找中，所花费的时间主要分为两类：元素的大小比较、秩的算术运算及其赋值。$T$为基本数据类型时，二者的复杂度均为$\mathcal{O}（1）$,然而元素的秩无非是整数，当$T$变化时，情形可能截然不同，甚至大小比较无法在$\mathcal{O}（1）$时间内完成。因此，接下来引入“查找长度”的概念。</p>
+<h1 id="查找长度"><a href="#查找长度" class="headerlink" title="查找长度"></a>查找长度</h1><p>我们规定在一次查找中，所经历的大小比较次数为其查找长度。为了估计出一般情形下的成功查找长度，不失一般性地在等概率条件下考察长度为$n=2^{k}-1$的有序向量，并将平均查找长度记为$C_{average}(k)$，总和记为$C(k)=C_{average}(k)*(2^{k}-1)$。<br>当$k=1$时，有边界条件：$C_{average}(k)=C(k)=2$<br>接下来用递推分析法。对于长度为$n=2^{k}-1$的有序向量，每一步迭代都有三种可能的分支：</p>
+<ol>
+<li><p>经过$1$次成功的比较，转化为一个规模为$2^{k-1}-1$的新问题</p>
+</li>
+<li><p>经过$1$次失败的比较和$1$次成功的比较，转化为另一个规模为$2^{k-1}-1$的新问题</p>
+</li>
+<li><p>经过$2$次失败的比较，在当前位置命中</p>
+</li>
+</ol>
+<p>由以上分析可得递推式：<br>$C(k)=[C(k-1)+(2^{k-1}-1)]+[2*(2^{k-1}-1)+C(k-1)]+2$<br>    $=2<em>C(k-1)+3</em>2^{k-1}-1$<br>令 $F(k)=C(k)-3k<em>2^{k-1}-1$<br>则有：<br>$F(1)=-2$<br>$F(k)=2</em>F(k-1)=2^{k-1}<em>F(1)=-2^{k}$<br>可得：<br>$C(k)=(3k/2-1)</em>(2^{k}-1)+3k/2$<br>所以：<br>$C_{average}(k)=C(k)/(2^{k}-1)$<br>$=3k/2-1+\mathcal{O}（\varepsilon）$<br>也就是说，忽略末尾的波动项，可得平均查找长度为：<br>$\mathcal{O}（1.5k）=\mathcal{O}（1.5*log_{2}n）$</p>
+<h1 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h1><p>尽管二分查找算法即使在最坏的情况下也可以保证$\mathcal{O}（logn）$的渐进复杂度，但就其常系数$1.5$而言仍有改进余地。以成功查找为例，即使是迭代次数相同的情况，对应的查找长度也不尽相等。究其根源在于，在每一步迭代中为确定左、右分支方向，分别需要做$1$次或$2$次元素比较，从而造成不同情况所对应查找长度的不均衡。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">胡言乱语</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">-二分查找 -复杂度</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.smallseaweed.me/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/09/09/%E5%90%91%E9%87%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">从零开始的数据结构之向量</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -221,9 +324,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
