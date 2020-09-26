@@ -16,7 +16,7 @@
 <meta property="og:description" content="从二分查找开始上一篇博客《从零开始的数据结构之向量》具体实现了基于有序向量的二分查找，即如下代码段：  12345678910111213template &lt;typename T&gt;Rank vector&lt;T&gt;::search(T const &amp; e,Rank lo,Rank hi)         &#x2F;&#x2F;二分查找 &amp;#123;int mi;while(lo&lt;hi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-25T01:12:59.000Z">
-<meta property="article:modified_time" content="2020-09-26T09:36:43.275Z">
+<meta property="article:modified_time" content="2020-09-26T09:42:03.567Z">
 <meta property="article:author" content="smallseaweed">
 <meta property="article:tag" content="二分查找">
 <meta property="article:tag" content="复杂度">
@@ -183,7 +183,7 @@
 <li><p>经过$2$次失败的比较，在当前位置命中</p>
 </li>
 </ol>
-<p>由以上分析可得递推式：<br>$C(k)=[C(k-1)+(2^{k-1}-1)]+[2*(2^{k-1}-1)+C(k-1)]+2$<br>    $=2<em>C(k-1)+3</em>2^{k-1}-1$<br>令 $F(k)=C(k)-3k<em>2^{k-1}-1$<br>则有：<br>$F(1)=-2$<br>$F(k)=2</em>F(k-1)=2^{k-1}<em>F(1)=-2^{k}$<br>可得：<br>$C(k)=(3k/2-1)</em>(2^{k}-1)+3k/2$<br>所以：<br>$C_{average}(k)=C(k)/(2^{k}-1)$<br>$=3k/2-1+\mathcal{O}（\varepsilon）$<br>也就是说，忽略末尾的波动项，可得平均查找长度为：<br>$\mathcal{O}（1.5k）=\mathcal{O}（1.5*log_{2}n）$</p>
+<p>由以上分析可得递推式：<br>$C(k)=[C(k-1)+(2^{k-1}-1)]+[2*(2^{k-1}-1)+C(k-1)]+2$<br>$=2<em>C(k-1)+3</em>2^{k-1}-1$<br>令 $F(k)=C(k)-3k<em>2^{k-1}-1$<br>则有：<br>$F(1)=-2$<br>$F(k)=2</em>F(k-1)=2^{k-1}<em>F(1)=-2^{k}$<br>可得：<br>$C(k)=(3k/2-1)</em>(2^{k}-1)+3k/2$<br>所以：<br>$C_{average}(k)=C(k)/(2^{k}-1)$<br>$=3k/2-1+\mathcal{O}（\varepsilon）$<br>也就是说，忽略末尾的波动项，可得平均查找长度为：<br>$\mathcal{O}（1.5k）=\mathcal{O}（1.5*log_{2}n）$</p>
 <h1 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h1><p>尽管二分查找算法即使在最坏的情况下也可以保证$\mathcal{O}（logn）$的渐进复杂度，但就其常系数$1.5$而言仍有改进余地。以成功查找为例，即使是迭代次数相同的情况，对应的查找长度也不尽相等。究其根源在于，在每一步迭代中为确定左、右分支方向，分别需要做$1$次或$2$次元素比较，从而造成不同情况所对应查找长度的不均衡。</p>
 
       
@@ -429,10 +429,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">胡言乱语</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -442,6 +438,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">向量</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">胡言乱语</a>
               </li>
             
             <div class="clearfix"></div>
