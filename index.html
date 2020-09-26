@@ -167,7 +167,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="从二分查找开始"><a href="#从二分查找开始" class="headerlink" title="从二分查找开始"></a>从二分查找开始</h1><p>上一篇博客<a href="">《从零开始的数据结构之向量》</a>具体实现了基于有序向量的二分查找，即如下代码段：</p>
+        <h1 id="从二分查找开始"><a href="#从二分查找开始" class="headerlink" title="从二分查找开始"></a>从二分查找开始</h1><p>上一篇博客<a target="_blank" rel="noopener" href="https://konn-submarine-bu.github.io/2020/09/09/%E5%90%91%E9%87%8F/">《从零开始的数据结构之向量》</a>具体实现了基于有序向量的二分查找，即如下代码段：</p>
 <blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Rank <span class="built_in">vector</span>&lt;T&gt;::search(T <span class="keyword">const</span> &amp; e,Rank lo,Rank hi)         <span class="comment">//二分查找 </span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> mi;</span><br><span class="line"><span class="keyword">while</span>(lo&lt;hi)                                            <span class="comment">//将递归改为迭代 </span></span><br><span class="line">&#123;</span><br><span class="line">	mi=(lo+hi)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(e&lt;_elem[mi]) hi=mi;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(e&gt;_elem[mi]) lo=mi+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> mi;</span><br><span class="line"> &#125; </span><br><span class="line"> <span class="keyword">return</span> <span class="number">-1</span>;                                            <span class="comment">//查找失败 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
@@ -482,7 +482,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">胡言乱语</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">向量</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,15 +502,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">向量</a>
+                <a href="javascript:void(0)" class="js-tag color5">胡言乱语</a>
               </li>
             
             <div class="clearfix"></div>
@@ -659,5 +659,20 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
