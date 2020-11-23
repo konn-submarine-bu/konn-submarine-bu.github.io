@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.smallseaweed.me">
-  <title>MergeSort | smallseaweedの博客</title>
+  <title>栈的应用——进制转换 | smallseaweedの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MergeSort is the first deterministic sort algorithm whose time conplexity is .">
+  <meta name="description" content="前几篇英文写作，虽然充分表现了初二水平，但本英渣实已尽力为之。接下来几篇，换回中文，来写一些有趣的事——栈的典型应用。对比向量与列表，栈的外部接口更加简化和紧凑（不是摸鱼）。因此相较于部分接口的实现，我们更关注栈ＬＩＦＯ特性在实际应用中的发挥。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MergeSort">
-<meta property="og:url" content="http://blog.smallseaweed.me/2020/10/17/MergeSort/index.html">
+<meta property="og:title" content="栈的应用——进制转换">
+<meta property="og:url" content="http://blog.smallseaweed.me/2020/11/24/%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="smallseaweedの博客">
-<meta property="og:description" content="MergeSort is the first deterministic sort algorithm whose time conplexity is .">
+<meta property="og:description" content="前几篇英文写作，虽然充分表现了初二水平，但本英渣实已尽力为之。接下来几篇，换回中文，来写一些有趣的事——栈的典型应用。对比向量与列表，栈的外部接口更加简化和紧凑（不是摸鱼）。因此相较于部分接口的实现，我们更关注栈ＬＩＦＯ特性在实际应用中的发挥。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.smallseaweed.me/pic/MergeSort/example.jpg">
-<meta property="article:published_time" content="2020-10-17T15:51:15.000Z">
-<meta property="article:modified_time" content="2020-10-27T16:54:42.997Z">
+<meta property="article:published_time" content="2020-11-23T17:02:47.000Z">
+<meta property="article:modified_time" content="2020-11-23T17:22:48.456Z">
 <meta property="article:author" content="seaweed">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="stack">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.smallseaweed.me/pic/MergeSort/example.jpg">
   
     <link rel="alternative" href="/atom.xml" title="smallseaweedの博客" type="application/atom+xml">
   
@@ -268,43 +266,35 @@ mjx-container[display="true"] + br {
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MergeSort" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-栈的应用——进制转换" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MergeSort
+      栈的应用——进制转换
     </h1>
   
 
         
-        <a href="/2020/10/17/MergeSort/" class="archive-article-date">
-  	<time datetime="2020-10-17T15:51:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-17</time>
+        <a href="/2020/11/24/%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
+  	<time datetime="2020-11-23T17:02:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>MergeSort is the <strong>first</strong> deterministic sort algorithm whose time conplexity is <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="10.761ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4756.4 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4F" d="M308 428Q289 428 289 438Q289 457 318 508T378 593Q417 638 475 671T599 705Q688 705 732 643T777 483Q777 380 733 285T620 123T464 18T293 -22Q188 -22 123 51T58 245Q58 327 87 403T159 533T249 626T333 685T388 705Q404 705 404 693Q404 674 363 649Q333 632 304 606T239 537T181 429T158 290Q158 179 214 114T364 48Q489 48 583 165T677 438Q677 473 670 505T648 568T601 617T528 636Q518 636 513 635Q486 629 460 600T419 544T392 490Q383 470 372 459Q341 430 308 428Z"></path></g></g><g data-mml-node="mo" transform="translate(796, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1185, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(2007.2, 0)"><path data-c="22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"></path></g><g data-mml-node="mi" transform="translate(2507.4, 0)"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(2805.4, 0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(3290.4, 0)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g><g data-mml-node="mi" transform="translate(3767.4, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(4367.4, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>.<br><a id="more"></a><br><img src="/pic/MergeSort/example.jpg" alt=""><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> <span class="built_in">vector</span>&lt;T&gt;::MergeSort(Rank lo,Rank hi)</span><br><span class="line">{</span><br><span class="line">	<span class="keyword">if</span>(hi-lo&lt;<span class="number">2</span>)  <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> mi=(lo+hi)/<span class="number">2</span>;</span><br><span class="line">	MergeSort(lo,mi);</span><br><span class="line">	Mergesor(mi,hi);</span><br><span class="line">	merge(lo,mi,hi);</span><br><span class="line">}</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> <span class="built_in">vector</span>&lt;T&gt;::merge(Ran lo,Rank mi,Rank hi)</span><br><span class="line">{</span><br><span class="line">	T*A=_elem+lo;</span><br><span class="line">	<span class="keyword">int</span> lb=mi-lo;</span><br><span class="line">	T* B=<span class="keyword">new</span> T[lb];</span><br><span class="line">	<span class="keyword">for</span>(Rank i=<span class="number">0</span>;i&lt;lb;B[i]=A[i++];) ;          <span class="comment">//复制前子向量[WHY?] </span></span><br><span class="line">	<span class="keyword">int</span> lc=hi-mi;</span><br><span class="line">	T* C=_elem+mi;                             <span class="comment">//[WHY?]</span></span><br><span class="line">	<span class="keyword">for</span>(Rank i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>;(j&lt;lb||k&lt;lc);)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span>((j&lt;lb)&amp;&amp;(!(k&lt;lc)||(B[j]&lt;=C[k]))) A[i++]=B[j++];</span><br><span class="line">		<span class="keyword">if</span>((k&lt;lc)&amp;&amp;(!(j&lt;lb)||(C[k]&lt;B[j])))  A[i++]=C[k++];</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">delete</span> [] B;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h1><p>Easily find that <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex" xmlns="http://www.w3.org/2000/svg" width="6.195ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 2738 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(878, 0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(1344, 0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1795, 0)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g><g data-mml-node="mi" transform="translate(2272, 0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></svg></mjx-container> costs not more than <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.919ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2174 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4F" d="M308 428Q289 428 289 438Q289 457 318 508T378 593Q417 638 475 671T599 705Q688 705 732 643T777 483Q777 380 733 285T620 123T464 18T293 -22Q188 -22 123 51T58 245Q58 327 87 403T159 533T249 626T333 685T388 705Q404 705 404 693Q404 674 363 649Q333 632 304 606T239 537T181 429T158 290Q158 179 214 114T364 48Q489 48 583 165T677 438Q677 473 670 505T648 568T601 617T528 636Q518 636 513 635Q486 629 460 600T419 544T392 490Q383 470 372 459Q341 430 308 428Z"></path></g></g><g data-mml-node="mo" transform="translate(796, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1185, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1785, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>.<br>So, if <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.71ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2082 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(704, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1093, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1693, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container> denotes the time cost of MergeSort, we have</p>
-<script type="math/tex; mode=display">
-T(n)=2*T(n/2)+\mathcal{O}(n) \\
-T(1)=\mathcal{O}(1)</script><p>Hence,</p>
-<script type="math/tex; mode=display">
-T(n)/n=T(n/2)/(n/2)+\mathcal{O}(1)</script><p>Then we let</p>
-<script type="math/tex; mode=display">
-S(n)=T(n)/n</script><p>Therefore,</p>
-<script type="math/tex; mode=display">
-S(1)=\mathcal{O}(1) \\
-S(n)=S(n/2)+\mathcal{O}(1) \\
-=S(n/4)+\mathcal{O}(2) \\
-=S(n/2^{k})+\mathcal{O}(k) \\
-=\mathcal{O}(logn) \\
-T(n)=n\cdot S(n)=\mathcal{O}(n\cdot logn)</script>
+        <p>　　前几篇英文写作，虽然充分表现了初二水平，但本英渣实已<del>尽力为之</del>。接下来几篇，换回中文，来写一些有趣的事——栈的典型应用。对比向量与列表，栈的外部接口更加简化和紧凑（不是摸鱼）。因此相较于部分接口的实现，我们更关注栈ＬＩＦＯ特性在实际应用中的发挥。<br><a id="more"></a><br>　　栈所擅长解决的典型问题，往往具有以下共同特征：
+　　</p>
+<ul>
+<li>解答以线性序列给出</li>
+<li>该序列依逆序计算输出</li>
+<li>输入输出规模未定，难以事先确定容器大小</li>
+<li>困了，明天再更</li>
+</ul>
+
       
 
       
@@ -317,7 +307,7 @@ T(n)=n\cdot S(n)=\mathcal{O}(n\cdot logn)</script>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stack</a>
         		</li>
       		
 		</ul>
@@ -336,18 +326,9 @@ T(n)=n\cdot S(n)=\mathcal{O}(n\cdot logn)</script>
   
 <nav id="article-nav">
   
-    <a href="/2020/10/21/%E6%B5%81%E8%A8%80/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          流言
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/10/13/Fibonacci%20Search/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Fibonacci Search</div>
+    <a href="/2020/11/19/Stack/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Stack</div>
       <i class="icon-circle-right"></i>
     </a>
   
