@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.smallseaweed.me">
-  <title>smallseaweedの博客</title>
+  <title>用Qt制作简易计算器 | smallseaweedの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="中国矿业大学大二在读">
-<meta property="og:type" content="website">
-<meta property="og:title" content="smallseaweedの博客">
-<meta property="og:url" content="http://blog.smallseaweed.me/page/3/index.html">
+  <meta name="description" content="近期上程序设计综合实践这门课，第一项作业是实现一个计算器。由于我只会c++语言，便简单学习了一下Qt,利用Qt的ui设计功能完成了作业，代码总计约六百行。源码上传至Github。 值得一提的是，本以为copy一下以前写的数据结构再写一点槽函数，很快就能解决；实际发现曾经写的代码bug百出，完全跑不起来。蚝蚝饭丝，以后写完，测试完再帖进博客。废话讲完，下面写实现过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Qt制作简易计算器">
+<meta property="og:url" content="http://blog.smallseaweed.me/2020/12/16/%E7%94%A8Qt%E5%88%B6%E4%BD%9C%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/index.html">
 <meta property="og:site_name" content="smallseaweedの博客">
-<meta property="og:description" content="中国矿业大学大二在读">
+<meta property="og:description" content="近期上程序设计综合实践这门课，第一项作业是实现一个计算器。由于我只会c++语言，便简单学习了一下Qt,利用Qt的ui设计功能完成了作业，代码总计约六百行。源码上传至Github。 值得一提的是，本以为copy一下以前写的数据结构再写一点槽函数，很快就能解决；实际发现曾经写的代码bug百出，完全跑不起来。蚝蚝饭丝，以后写完，测试完再帖进博客。废话讲完，下面写实现过程。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-16T11:36:05.000Z">
+<meta property="article:modified_time" content="2020-12-16T12:37:38.034Z">
 <meta property="article:author" content="seaweed">
-<meta property="article:tag" content="CS, C++">
+<meta property="article:tag" content="stack">
+<meta property="article:tag" content="程序实践">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="smallseaweedの博客" type="application/atom+xml">
@@ -264,36 +267,31 @@ mjx-container[display="true"] + br {
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-二分查找的时间复杂度及其不足" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-用Qt制作简易计算器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/">二分查找的时间复杂度及其不足</a>
+    <h1 class="article-title" itemprop="name">
+      用Qt制作简易计算器
     </h1>
   
 
         
-        <a href="/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/" class="archive-article-date">
-  	<time datetime="2020-09-25T01:12:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
+        <a href="/2020/12/16/%E7%94%A8Qt%E5%88%B6%E4%BD%9C%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2020-12-16T11:36:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="从二分查找开始"><a href="#从二分查找开始" class="headerlink" title="从二分查找开始"></a>从二分查找开始</h1><p>上一篇博客<a target="_blank" rel="noopener" href="https://konn-submarine-bu.github.io/2020/09/09/%E5%90%91%E9%87%8F/">《从零开始的数据结构之向量》</a>具体实现了基于有序向量的二分查找，即如下代码段：</p>
-<blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Rank <span class="built_in">vector</span>&lt;T&gt;::search(T <span class="keyword">const</span> &amp; e,Rank lo,Rank hi)         <span class="comment">//二分查找 </span></span><br><span class="line">{</span><br><span class="line"><span class="keyword">int</span> mi;</span><br><span class="line"><span class="keyword">while</span>(lo&lt;hi)                                            <span class="comment">//将递归改为迭代 </span></span><br><span class="line">{</span><br><span class="line">	mi=(lo+hi)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(e&lt;_elem[mi]) hi=mi;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(e&gt;_elem[mi]) lo=mi+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> mi;</span><br><span class="line"> } </span><br><span class="line"> <span class="keyword">return</span> <span class="number">-1</span>;                                            <span class="comment">//查找失败 </span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>在以上查找中，所花费的时间主要分为两类：元素的大小比较、秩的算术运算及其赋值。<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.593ex" height="1.532ex" role="img" focusable="false" viewBox="0 -677 704 677"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g></g></g></svg></mjx-container>为基本数据类型时，二者的复杂度均为<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.692ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2074 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4F" d="M308 428Q289 428 289 438Q289 457 318 508T378 593Q417 638 475 671T599 705Q688 705 732 643T777 483Q777 380 733 285T620 123T464 18T293 -22Q188 -22 123 51T58 245Q58 327 87 403T159 533T249 626T333 685T388 705Q404 705 404 693Q404 674 363 649Q333 632 304 606T239 537T181 429T158 290Q158 179 214 114T364 48Q489 48 583 165T677 438Q677 473 670 505T648 568T601 617T528 636Q518 636 513 635Q486 629 460 600T419 544T392 490Q383 470 372 459Q341 430 308 428Z"></path></g></g><g data-mml-node="mo" transform="translate(796, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(1185, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1685, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>,然而元素的秩无非是整数，当<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.593ex" height="1.532ex" role="img" focusable="false" viewBox="0 -677 704 677"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g></g></g></svg></mjx-container>变化时，情形可能截然不同，甚至大小比较无法在<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.692ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2074 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4F" d="M308 428Q289 428 289 438Q289 457 318 508T378 593Q417 638 475 671T599 705Q688 705 732 643T777 483Q777 380 733 285T620 123T464 18T293 -22Q188 -22 123 51T58 245Q58 327 87 403T159 533T249 626T333 685T388 705Q404 705 404 693Q404 674 363 649Q333 632 304 606T239 537T181 429T158 290Q158 179 214 114T364 48Q489 48 583 165T677 438Q677 473 670 505T648 568T601 617T528 636Q518 636 513 635Q486 629 460 600T419 544T392 490Q383 470 372 459Q341 430 308 428Z"></path></g></g><g data-mml-node="mo" transform="translate(796, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(1185, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1685, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>时间内完成。因此，接下来引入“查找长度”的概念。<br>
-        
-          <a class="article-more-a" href="/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/#more">more >></a>
-        
+        <p>近期上程序设计综合实践这门课，第一项作业是实现一个计算器。<br>由于我只会c++语言，便简单学习了一下<a target="_blank" rel="noopener" href="https://www.qt.io/">Qt</a>,利用Qt的ui设计功能完成了作业，代码总计约六百行。<br><a target="_blank" rel="noopener" href="https://github.com/konn-submarine-bu/A-Calculator">源码</a>上传至Github。</p>
+<p>值得一提的是，本以为copy一下以前写的数据结构再写一点槽函数，很快就能解决；实际发现曾经写的代码bug百出，完全跑不起来。<br>蚝蚝饭丝，以后写完，测试完再帖进博客。<br>废话讲完，下面写实现过程。<br><a id="more"></a><br>整体思路方面，建一个字符向量，用于存放所要计算的表达式，计算器的按钮向其中输入组成表达式的一个个字符。<br>同时定义一个string类用于输出显示，每次按下按钮就调用lineEdit的setText函数将当前表达式显示出来，强大的QString封装了大量实用的函数，大大简化了程序的实现。<br>设置另外四个命令按钮：C(清空)，-&gt;(退格)，=(计算结果并显示)，RPN(转换为逆波兰表达式)。</p>
+<p>一些细节：<br>建两个栈，操作符栈optr与操作数栈opnd<br>定义函数isDigit用于判断当前元素是数据还是运算符，定义函数readNumber读取完整数据<br>按下“=”以后，先调用isDigit，<br>if ture，则readNumber后opnd入栈<br>否则，判断栈顶运算符与当前运算符的优先级关系<br>打表便于switch<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> orderBetween[<span class="number">10</span>][<span class="number">10</span>]=  <span class="comment">//对优先级关系制表</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//         |-------------当前运算符----------------|</span></span><br><span class="line">    <span class="comment">//         +   -   *   /   ^   !   %   (   )  \0</span></span><br><span class="line">    <span class="comment">/*-- + */</span> &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/* | - */</span> &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/*栈 * */</span>  &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/*顶 / */</span>  &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/*运 ^ */</span>  &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/*算 ! */</span>  &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/*符 % */</span>  &#123;<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/* | ( */</span> &#123;<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;=&#x27;</span>,<span class="string">&#x27; &#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/* | ) */</span> &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>&#125;,</span><br><span class="line">    <span class="comment">/*--\0 */</span> &#123;<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;=&#x27;</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>初始化一个数组实现字符到下标的转换<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> allOptr[<span class="number">10</span>]=&#123;<span class="string">&#x27;+&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;/&#x27;</span>,<span class="string">&#x27;^&#x27;</span>,<span class="string">&#x27;!&#x27;</span>,<span class="string">&#x27;%&#x27;</span>,<span class="string">&#x27;(&#x27;</span>,<span class="string">&#x27;)&#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;  <span class="comment">//所有运算符</span></span><br></pre></td></tr></table></figure><br>如果当前运算符优先级更高，则推迟计算，optr入栈<br>如果两者相等，则为匹配的括号或结束符，同时忽略<br>如果栈顶运算符优先级更高，则弹出运算符，在操作数栈中取出数据计算，计算结果入栈<br>循环完毕，计算结果存储在opnd栈中</p>
+<p>至于RPN，只需将以上过程中，readNumber以及栈顶运算符优先级更高的情况接入string尾部，删除计算和入栈即可</p>
+
       
 
       
@@ -306,11 +304,11 @@ mjx-container[display="true"] + br {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">复杂度</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stack</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二分查找</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">程序实践</a>
         		</li>
       		
 		</ul>
@@ -319,16 +317,24 @@ mjx-container[display="true"] + br {
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/25/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E4%B8%8D%E8%B6%B3/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/12/16/%E8%AF%95%E6%8E%A2%E5%9B%9E%E6%BA%AF%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">试探回溯法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -348,170 +354,37 @@ mjx-container[display="true"] + br {
 
 
 
-
-  
-    <article id="post-向量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/09/%E5%90%91%E9%87%8F/">从零开始的数据结构之向量</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/09/%E5%90%91%E9%87%8F/" class="archive-article-date">
-  	<time datetime="2020-09-09T03:35:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="向量与数组"><a href="#向量与数组" class="headerlink" title="向量与数组"></a>向量与数组</h1><p>向量类似于数组，访问方式为“循秩访问”（call-by-rank），可以在常数时间内完成。<br>
-        
-          <a class="article-more-a" href="/2020/09/09/%E5%90%91%E9%87%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">向量</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/09/%E5%90%91%E9%87%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-写在开始" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/08/%E5%86%99%E5%9C%A8%E5%BC%80%E5%A7%8B/">写在开始</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/08/%E5%86%99%E5%9C%A8%E5%BC%80%E5%A7%8B/" class="archive-article-date">
-  	<time datetime="2020-09-08T03:47:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>呼~折腾了两天，这个Blog算是能用了。<br/><br>感谢<a target="_blank" rel="noopener" href="https://easyhexo.com/">EasyHexo</a>的教程。<br/><br>感谢<a target="_blank" rel="noopener" href="http://litten.me/" title="博客">Litten</a>大神的主题<a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia" title="github.com">yilia</a>。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Hello World!</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/08/%E5%86%99%E5%9C%A8%E5%BC%80%E5%A7%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'true' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "S9AHthqlbfxJ2ytb0uUytsBE-gzGzoHsz",
+            app_key: "eCoQeSH0MPcwR9vhVb0syVU3",
+            placeholder: "在这里给我留言吧！",
+            avatar:"mm"
+        });
+    }
+</script>
+    </section>
+  
+  
+  
+
+  
+
+  
+
   
 
 
@@ -551,8 +424,8 @@ mjx-container[display="true"] + br {
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
