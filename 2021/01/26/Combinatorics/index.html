@@ -8,18 +8,24 @@
   <link rel="dns-prefetch" href="http://blog.smallseaweed.me">
   <title>Topics in Algebraic Combinatorics | smallseaweedの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="author: Richard P. Stanley">
+  <meta name="description" content="author: Richard P. Stanleychapter 1 Walks in graphs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Topics in Algebraic Combinatorics">
 <meta property="og:url" content="http://blog.smallseaweed.me/2021/01/26/Combinatorics/index.html">
 <meta property="og:site_name" content="smallseaweedの博客">
-<meta property="og:description" content="author: Richard P. Stanley">
+<meta property="og:description" content="author: Richard P. Stanleychapter 1 Walks in graphs">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.1-1.png">
 <meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.1-2.png">
 <meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.2-1.png">
+<meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.3-1.png">
+<meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.4-1.png">
+<meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.5-1.png">
+<meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/1.6-1.png">
+<meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/o1.png">
+<meta property="og:image" content="http://blog.smallseaweed.me/pic/combinatorics/o2.png">
 <meta property="article:published_time" content="2021-01-26T04:48:27.000Z">
-<meta property="article:modified_time" content="2021-01-26T06:30:38.384Z">
+<meta property="article:modified_time" content="2021-01-27T09:03:16.728Z">
 <meta property="article:author" content="seaweed">
 <meta property="article:tag" content="combinatorics">
 <meta name="twitter:card" content="summary">
@@ -290,7 +296,7 @@ mjx-container[display="true"] + br {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>author: Richard P. Stanley<br><a id="more"></a><br><img src="/pic/combinatorics/1.1-1.png" alt=""><br><img src="/pic/combinatorics/1.1-2.png" alt=""><br><img src="/pic/combinatorics/1.2-1.png" alt=""></p>
+        <p>author: Richard P. Stanley<br>chapter 1 Walks in graphs<br><a id="more"></a><br><img src="/pic/combinatorics/1.1-1.png" alt=""><br><img src="/pic/combinatorics/1.1-2.png" alt=""><br><img src="/pic/combinatorics/1.2-1.png" alt=""><br><img src="/pic/combinatorics/1.3-1.png" alt=""><br><img src="/pic/combinatorics/1.4-1.png" alt=""><br><img src="/pic/combinatorics/1.5-1.png" alt=""><br><img src="/pic/combinatorics/1.6-1.png" alt=""><br><img src="/pic/combinatorics/o1.png" alt=""><br><img src="/pic/combinatorics/o2.png" alt=""></p>
 
       
 
@@ -524,19 +530,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">复杂度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">search</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort</a>
+                <a href="javascript:void(0)" class="js-tag color4">复杂度</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,11 +554,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">程序实践</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hello World!</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hello World!</a>
+                <a href="javascript:void(0)" class="js-tag color5">程序实践</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,5 +691,21 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
