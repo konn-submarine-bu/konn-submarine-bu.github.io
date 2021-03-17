@@ -266,6 +266,109 @@ mjx-container[display="true"] + br {
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-qwe" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/18/qwe/">qwe</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/18/qwe/" class="archive-article-date">
+  	<time datetime="2021-03-17T16:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="include"><a href="#include" class="headerlink" title="include"></a>include<stdio.h></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include"></a>include<unistd.h></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include"></a>include<stdlib.h></h1><h1 id="include-3"><a href="#include-3" class="headerlink" title="include"></a>include<sys/ipc.h></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include"></a>include<sysm.h></h1><p>int semid1,semid2; //定义两个信号量<br>void v1(int semid1);<br>void v2(int semid2);<br>void p1(int semid1);<br>void p2(int semid2);<br>void conductor();<br>void driver();<br>//2.1定义semun共用体<br>union semun {<br>               int              val;<br>               struct semid_ds <em>buf;<br>               unsigned short  </em>array;<br>               struct seminfo  *__buf;</p>
+<pre><code>       &#125;;
+</code></pre><p>int main()<br>{<br>        key_t key1,key2;//定义信号量的key值<br>        //int semid1,semid2;<br>        //2.2定义信号量初始值<br>        union semun v1,v2;<br>        int r1,r2;<br>        /ruct sembuf op1[1],op[2];<br>        //1.创建信号量<br>        key1=ftok(“.”,36);<br>        key2=ftok(“.”,98);<br>        if(key1==-1)<br>        {<br>                printf(“key1 get erro:%m\n”);<br>                exit(-1);<br>        }<br>        if(key2==-1)<br>        {<br>                printf(“key2 get erro:%m\n”);<br>                exit(-1);<br>        }<br>        //得到信号量<br>        semid1=semget(key1,1,IPC_CREAT|IPC_EXCL|0666);<br>        semid2=semget(key2,1,IPC_CREAT|IPC_EXCL|0666);<br>        /mid1=semget(key1,1,0);<br>        /mid2=semget(key2,1,0);<br>                if(semid1==-1)<br>                 {<br>                         printf(“semid1 get erro:%m\n”);<br>                         exit(-1);<br>                 }<br>                if(semid2==-1)<br>                 {<br>                         printf(“semid2 get erro:%m\n”);<br>                         exit(-1);<br>                 }</p>
+<pre><code>    //printf(&quot;semid1:%d\n&quot;,semid1);
+    //printf(&quot;semid2:%d\n&quot;,semid2);
+    //2.初始化信号量为0
+    v1.val=0;
+    v2.val=0;
+            r1=semctl(semid1,0,SETVAL,v1);
+            r2=semctl(semid2,0,SETVAL,v2);
+            if(r1==-1)
+             &#123;
+                     printf(&quot;r1 get erro:%m\n&quot;);
+                     exit(-1);
+             &#125;
+            if(r2==-1)
+             &#123;
+                    printf(&quot;r2 get erro:%m\n&quot;);
+                     exit(-1);
+             &#125;
+    if(fork()&gt;0)            //父进程
+    &#123;
+            driver();
+    &#125;
+    else                    //子进程
+    &#123;
+            conductor();
+    &#125;
+
+    //4.删除信号量
+    semctl(semid1,0,IPC_RMID);
+    semctl(semid2,0,IPC_RMID);
+</code></pre><p>return 0;<br>}</p>
+<p>void p1(int semid1)<br>{<br>        struct sembuf op1[1];<br>        op1[0].sem_num=0;<br>        op1[0].sem_op=-1;//p进行-1操作<br>        op1[0].sem_flg=0;<br>        semop(semid1,op1,1);<br>}<br>void p2(int semid2)<br>{<br>        struct sembuf op2[1];<br>        op2[0].sem_num=0;<br>        op2[0].sem_op=-1;//p进行-1操作<br>        op2[0].sem_flg=0;</p>
+<pre><code>     semop(semid2,op2,1);
+</code></pre><p>}<br>void v1(int semid1)<br>{<br>        struct sembuf op1[1];<br>        op1[0].sem_num=0;<br>        op1[0].sem_op=1;/进行+1操作<br>        op1[0].sem_flg=0;</p>
+<pre><code>    semop(semid1,op1,1);
+</code></pre><p>}<br>void v2(int semid2)<br>{<br>        struct sembuf op2[1];<br>        op2[0].sem_num=0;<br>        op2[0].sem_op=1;/进行+1操作<br>        op2[0].sem_flg=0;</p>
+<pre><code>    semop(semid2,op2,1);
+</code></pre><p>}<br>void driver()//司机操作函数<br>{<br>        while(1)<br>        {<br>        printf(“driver开车\n”);<br>        v2(semid2);<br>        p1(semid1);<br>        printf(“driver离站\n”);<br>        sleep(1);<br>        }</p>
+<p>}<br>void conductor()//售票员操作函数<br>{<br>        while(1)<br>       {<br>        printf(“conductor售票\n”);<br>        p2(semid2);<br>        printf(“conductor开车门\n”);<br>        printf(“passenger上下车\n”);<br>        printf(“conductor关车门\n”);<br>        v1(semid1);<br>        sleep(1);<br>        }<br>}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/18/qwe/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-烧烤和阿凡达" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -934,87 +1037,6 @@ mjx-container[display="true"] + br {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/29/%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-卡特兰数CatalanNumber" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/27/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0CatalanNumber/">卡特兰数(CatalanNumber)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/27/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0CatalanNumber/" class="archive-article-date">
-  	<time datetime="2020-11-26T18:15:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在<a target="_blank" rel="noopener" href="https://konn-submarine-bu.github.io/2020/11/27/%E6%A0%88%E6%B7%B7%E6%B4%97/#%E6%A0%88%E6%B7%B7%E6%B4%97%E7%9A%84%E8%AE%A1%E6%95%B0">栈混洗的计数</a>中我们得到了以下公式：</p>
-<script type="math/tex; mode=display">SP(n)=\sum_{k=1}^{n}{SP(k-1) \times SP(n-k)}</script><p>它的结果是著名的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Catalan_number">卡特兰数</a>，以下选择一种方法求解其通项。<br>
-        
-          <a class="article-more-a" href="/2020/11/27/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0CatalanNumber/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">combinatorics</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/27/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0CatalanNumber/">展开全文 >></a>
         </p>
       
 
