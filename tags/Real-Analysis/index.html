@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.smallseaweed.me">
-  <title>试探回溯法 | smallseaweedの博客</title>
+  <title>Tag: Real Analysis | smallseaweedの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为解决某一问题，从零开始，尝试逐步增加满足条件的前缀的长，称作“试探”；根据某些局部特征，以候选解的子集为单位批量排除，由于搜索空间通常成树状结构，而被排除的子集多为其中的分支，所以这一技巧被形象地称作“剪枝”；试探过程遭遇剪枝，立刻缩短至前一步的长度，继续试探，此为“回溯”。以下利用试探回溯法，给出八皇后问题和迷宫寻径问题的解。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="试探回溯法">
-<meta property="og:url" content="http://blog.smallseaweed.me/2020/12/16/%E8%AF%95%E6%8E%A2%E5%9B%9E%E6%BA%AF%E6%B3%95/index.html">
+  <meta name="description" content="中国矿业大学大二在读">
+<meta property="og:type" content="website">
+<meta property="og:title" content="smallseaweedの博客">
+<meta property="og:url" content="http://blog.smallseaweed.me/tags/Real-Analysis/index.html">
 <meta property="og:site_name" content="smallseaweedの博客">
-<meta property="og:description" content="为解决某一问题，从零开始，尝试逐步增加满足条件的前缀的长，称作“试探”；根据某些局部特征，以候选解的子集为单位批量排除，由于搜索空间通常成树状结构，而被排除的子集多为其中的分支，所以这一技巧被形象地称作“剪枝”；试探过程遭遇剪枝，立刻缩短至前一步的长度，继续试探，此为“回溯”。以下利用试探回溯法，给出八皇后问题和迷宫寻径问题的解。">
+<meta property="og:description" content="中国矿业大学大二在读">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-16T11:35:44.000Z">
-<meta property="article:modified_time" content="2020-12-17T17:41:21.210Z">
 <meta property="article:author" content="seaweed">
-<meta property="article:tag" content="stack">
+<meta property="article:tag" content="CS, C++">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="smallseaweedの博客" type="application/atom+xml">
@@ -266,132 +264,60 @@ mjx-container[display="true"] + br {
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-试探回溯法" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      试探回溯法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/09/30/Analysis%20%5BTenrece%20Tao%5D%20Chapter%202/" class="archive-article-date">
+  	<time datetime="2021-09-30T03:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-30</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/09/30/Analysis%20%5BTenrece%20Tao%5D%20Chapter%202/">Analysis [Tenrece Tao] Chapter 2</a>
     </h1>
   
 
-        
-        <a href="/2020/12/16/%E8%AF%95%E6%8E%A2%E5%9B%9E%E6%BA%AF%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-12-16T11:35:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为解决某一问题，从零开始，尝试逐步增加满足条件的前缀的长，称作“试探”；<br>根据某些局部特征，以候选解的子集为单位批量排除，由于搜索空间通常成树状结构，而被排除的子集多为其中的分支，所以这一技巧被形象地称作“剪枝”；<br>试探过程遭遇剪枝，立刻缩短至前一步的长度，继续试探，此为“回溯”。<br>以下利用试探回溯法，给出八皇后问题和迷宫寻径问题的解。<br><a id="more"></a></p>
-<h1 id="八皇后"><a href="#八皇后" class="headerlink" title="八皇后"></a>八皇后</h1><p>国际象棋中皇后的势力范围覆盖其所在水平线、垂直线以及两条对角线。考察如下问题：能否在<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="5.481ex" height="1.136ex" role="img" focusable="false" viewBox="0 -491 2422.4 502"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(822.2, 0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(1822.4, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>的棋盘中放下<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>个皇后，且使她们彼此不攻击？</p>
-<p>先实现皇后类：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">queen</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    queen( <span class="keyword">int</span> xx=<span class="number">0</span>, <span class="keyword">int</span> yy=<span class="number">0</span> ) : x(xx), y(yy) {};</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> == (queen <span class="keyword">const</span>&amp; Q) <span class="keyword">const</span> </span><br><span class="line">    <span class="comment">//重载判等运算符，为了使用vector类中的find()函数来判断是否满足要求</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> ( x==Q.x   <span class="comment">//行冲突（可省略）</span></span><br><span class="line">              || y==Q.y   <span class="comment">//列冲突</span></span><br><span class="line">              || (x+y)==(Q.x+Q.y)   <span class="comment">//正对角线冲突</span></span><br><span class="line">              || (y-x)==(Q.y-Q.x)   <span class="comment">//反对角线冲突</span></span><br><span class="line">               );</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> != (queen <span class="keyword">const</span>&amp; Q) <span class="keyword">const</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> !(*<span class="keyword">this</span> == Q);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
-<p>基于试探回溯法，从第一行第一列起放置皇后（入栈），试探下一行（入栈），如果所有列都不能满足要求，返回上一个皇后（出栈），调整位置至下一列。经过这样的反复试探、回溯，在变量中存储解的个数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">placeQueens</span><span class="params">(<span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> nSolu = <span class="number">0</span>;  <span class="comment">//记录解的个数</span></span><br><span class="line">	<span class="function">queen <span class="title">Q</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>)</span></span>;  <span class="comment">//从原点开始</span></span><br><span class="line">	<span class="function"><span class="built_in">stack</span>&lt;queen&gt; <span class="title">solu</span><span class="params">(N)</span></span>;</span><br><span class="line">	<span class="keyword">while</span> (!(Q.x==<span class="number">0</span>&amp;&amp;Q.y&gt;=N))  <span class="comment">//穷举完毕，算法结束</span></span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (N &lt;= solu.<span class="built_in">size</span>() || N &lt;= Q.y)  <span class="comment">//已出界</span></span><br><span class="line">		{</span><br><span class="line">			Q = solu.pop();</span><br><span class="line">			Q.y++;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">while</span> ((Q.y &lt; N) &amp;&amp; (<span class="number">0</span> &lt;= solu.<span class="built_in">find</span>(Q))) Q.y++;  <span class="comment">//逐个比对，尝试找到下个可摆放的列</span></span><br><span class="line">			<span class="keyword">if</span> (Q.y &lt; N)  <span class="comment">//若未出界</span></span><br><span class="line">			{</span><br><span class="line">				solu.push(Q);</span><br><span class="line">				<span class="keyword">if</span> (N &lt;= solu.<span class="built_in">size</span>()) nSolu++;</span><br><span class="line">				Q.x++;</span><br><span class="line">				Q.y = <span class="number">0</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> nSolu;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>这段代码照抄了教材，其中部分看似不合逻辑的语句实则考虑到了所有边界情况，起初以为教材这里有问题，原来是自己没看懂，建议细品。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stack</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Real Analysis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/12/16/%E7%94%A8Qt%E5%88%B6%E4%BD%9C%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          用Qt制作简易计算器
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/12/03/%E4%B8%80%E5%8D%83%E5%B9%B4%E4%BB%A5%E5%90%8E/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">一千年以后</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
-  
-    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'true' == true ? true : false;
-   var verify = 'true' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "S9AHthqlbfxJ2ytb0uUytsBE-gzGzoHsz",
-            app_key: "eCoQeSH0MPcwR9vhVb0syVU3",
-            placeholder: "在这里给我留言吧！",
-            avatar:"mm"
-        });
-    }
-</script>
-    </section>
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -431,9 +357,9 @@ mjx-container[display="true"] + br {
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -516,6 +442,10 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Real Analysis</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">data structure</a>
