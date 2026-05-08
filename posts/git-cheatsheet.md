@@ -1,7 +1,7 @@
 ---
 title: Git 常用命令速查
 date: 2026-05-08
-category: 工坊
+category: Workshop
 tags: [Git, 工具]
 ---
 
