@@ -1,33 +1,23 @@
 ---
-title: 关于
+title: About
 date: 2026-05-08
 ---
 
-## 关于我
+## About Me
 
-这里可以写一段自我介绍。
+A place for thoughts and notes.
 
 ---
 
-## 关于墨
+## About Ink
 
-**墨** 是一个极简的个人博客系统。
+**Ink** is a minimalist personal blog.
 
-### 特点
+- Pure static, hosted on GitHub Pages
+- Markdown writing experience
+- Clean, quiet design
+- Responsive layout
 
-- 纯静态，托管于 GitHub Pages
-- Markdown 写作体验
-- 写意风格的设计语言
-- 响应式布局，适配移动端
-- 零依赖构建工具
+### Contact
 
-### 使用方式
-
-1. 在 `posts/` 目录下创建 `.md` 文件
-2. 在 `posts/index.json` 中注册文章信息
-3. 推送到 GitHub，自动部署
-
-### 联系
-
-- GitHub: [your-username](https://github.com)
-- Email: your-email@example.com
+- GitHub: [konn-submarine-bu](https://github.com/konn-submarine-bu)

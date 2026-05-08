@@ -63,7 +63,7 @@ async function loadPostList(category) {
       : allPosts.filter(p => p.category === currentCategory);
 
     if (!filtered || filtered.length === 0) {
-      container.innerHTML = '<p class="empty-message">此分类下暂无文章。</p>';
+      container.innerHTML = '<p class="empty-message">No posts in this category yet.</p>';
       return;
     }
 
@@ -82,7 +82,7 @@ async function loadPostList(category) {
     `).join('');
 
   } catch (err) {
-    container.innerHTML = '<p class="empty-message">暂无文章索引。<br>请创建 <code>posts/index.json</code> 文件。</p>';
+    container.innerHTML = '<p class="empty-message">No posts found.<br>Create <code>posts/index.json</code> to get started.</p>';
   }
 }
 
@@ -109,10 +109,10 @@ async function loadPost(slug) {
     const { frontMatter, content } = parseFrontMatter(md);
 
     document.title = frontMatter.title
-      ? `${frontMatter.title} · 墨`
-      : '墨 · Ink';
+      ? `${frontMatter.title} · Ink`
+      : 'Ink';
 
-    let html = '<a href="#/" class="post-back">返回</a>';
+    let html = '<a href="#/" class="post-back">Back</a>';
 
     if (frontMatter.title) {
       html += `<h1>${escapeHtml(frontMatter.title)}</h1>`;
@@ -144,8 +144,8 @@ async function loadPost(slug) {
 
   } catch (err) {
     container.innerHTML = `
-      <a href="#/" class="post-back">返回</a>
-      <p class="empty-message">文章未找到。</p>
+      <a href="#/" class="post-back">Back</a>
+      <p class="empty-message">Post not found.</p>
     `;
   }
 }
@@ -154,7 +154,7 @@ async function loadPost(slug) {
 
 async function loadAbout() {
   const container = document.getElementById('about-content');
-  document.title = '关于 · 墨';
+  document.title = 'About · Ink';
 
   try {
     const resp = await fetch('posts/about.md');
@@ -166,8 +166,8 @@ async function loadAbout() {
     container.innerHTML = marked.parse(content);
   } catch (err) {
     container.innerHTML = `
-      <h1>关于</h1>
-      <p>此处暂无内容。</p>
+      <h1>About</h1>
+      <p>Nothing here yet.</p>
     `;
   }
 }
