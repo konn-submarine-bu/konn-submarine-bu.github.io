@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: 2026-05-08
-category: Musings
+category: 随想
 tags: [随笔]
 ---
 
