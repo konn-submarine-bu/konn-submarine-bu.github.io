@@ -5,16 +5,16 @@ const POSTS_INDEX = POSTS_DIR + 'index.json';
 
 // ===== Marked.js Custom Renderer =====
 
-const renderer = new marked.Renderer();
-const origImage = renderer.image.bind(renderer);
-renderer.image = function(href, title, text) {
-  const img = origImage(href, title, text);
-  if (text) {
-    return `<figure class="post-figure">${img}<figcaption>${text}</figcaption></figure>`;
+const renderer = {
+  image(token) {
+    const img = `<img src="${token.href}" alt="${token.text}" loading="lazy">`;
+    if (token.text) {
+      return `<figure class="post-figure">${img}<figcaption>${token.text}</figcaption></figure>`;
+    }
+    return img;
   }
-  return img;
 };
-marked.setOptions({ renderer });
+marked.use({ renderer });
 
 // ===== Router =====
 
