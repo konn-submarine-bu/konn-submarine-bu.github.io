@@ -41,24 +41,37 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // ===== Load Post List =====
 
-async function loadPostList() {
+let allPosts = [];
+let currentCategory = 'all';
+
+async function loadPostList(category) {
+  if (category !== undefined) {
+    currentCategory = category;
+  }
+
   const container = document.getElementById('post-list');
 
   try {
-    const resp = await fetch(POSTS_INDEX);
-    if (!resp.ok) throw new Error('Failed to load index');
+    if (allPosts.length === 0) {
+      const resp = await fetch(POSTS_INDEX);
+      if (!resp.ok) throw new Error('Failed to load index');
+      allPosts = await resp.json();
+    }
 
-    const posts = await resp.json();
+    const filtered = currentCategory === 'all'
+      ? allPosts
+      : allPosts.filter(p => p.category === currentCategory);
 
-    if (!posts || posts.length === 0) {
-      container.innerHTML = '<p class="empty-message">尚无文章，静待笔墨。</p>';
+    if (!filtered || filtered.length === 0) {
+      container.innerHTML = '<p class="empty-message">此分类下暂无文章。</p>';
       return;
     }
 
-    container.innerHTML = posts.map(post => `
+    container.innerHTML = filtered.map(post => `
       <a href="#/post/${post.slug}" class="post-card">
         <h3 class="post-card-title">${escapeHtml(post.title)}</h3>
         <span class="post-card-date">${formatDate(post.date)}</span>
+        ${post.category ? `<span class="post-cat-label">${escapeHtml(post.category)}</span>` : ''}
         ${post.excerpt ? `<p class="post-card-excerpt">${escapeHtml(post.excerpt)}</p>` : ''}
         ${post.tags && post.tags.length > 0 ? `
           <div class="post-tags">
@@ -72,6 +85,16 @@ async function loadPostList() {
     container.innerHTML = '<p class="empty-message">暂无文章索引。<br>请创建 <code>posts/index.json</code> 文件。</p>';
   }
 }
+
+// ===== Category Tabs =====
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('cat-tab')) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    loadPostList(e.target.dataset.cat);
+  }
+});
 
 // ===== Load Single Post =====
 
