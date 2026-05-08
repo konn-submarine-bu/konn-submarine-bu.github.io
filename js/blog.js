@@ -3,6 +3,19 @@
 const POSTS_DIR = 'posts/';
 const POSTS_INDEX = POSTS_DIR + 'index.json';
 
+// ===== Marked.js Custom Renderer =====
+
+const renderer = new marked.Renderer();
+const origImage = renderer.image.bind(renderer);
+renderer.image = function(href, title, text) {
+  const img = origImage(href, title, text);
+  if (text) {
+    return `<figure class="post-figure">${img}<figcaption>${text}</figcaption></figure>`;
+  }
+  return img;
+};
+marked.setOptions({ renderer });
+
 // ===== Router =====
 
 function route() {
