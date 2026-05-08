@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>墨 · Ink</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a href="/" class="site-title">墨</a>
+      <nav class="site-nav">
+        <a href="/">文章</a>
+        <a href="#about">关于</a>
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="page">
+        <div class="hero">
+          <img src="images/avatar.jpg" alt="avatar" class="avatar" onerror="this.style.display='none'">
+          <h1 class="hero-title">笔墨留白</h1>
+          <p class="hero-subtitle">以简约之笔，记浮世之思。</p>
+        </div>
+        <div class="post-list" id="post-list">
+          <p class="loading">载入中...</p>
+        </div>
+      </section>
+
+      <article id="post" class="page" style="display:none">
+        <div class="post-content" id="post-content"></div>
+      </article>
+
+      <section id="about" class="page" style="display:none">
+        <div class="post-content" id="about-content"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> · 以墨为铭</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>
