@@ -1,5 +1,5 @@
 ---
-title: Hello World
+title: 记一次伴郎迎亲之旅
 date: 2026-05-08
 category: Musings
 tags: [随笔]
@@ -7,9 +7,7 @@ tags: [随笔]
 
 ## 开始
 
-你好，世界。
-
-这是**墨**的第一篇文章。墨，意为墨迹、墨色，取意于水墨画中的留白与意境。
+五月五，我的表哥QD举办婚礼的日子
 
 ---
 
@@ -37,7 +35,7 @@ print(greet("世界"))
 
 你可以直接在 Markdown 中插入图片：
 
-![示例图片](https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200)
+
 
 只需将图片放入 `images/` 目录，然后在文章中引用即可。
 

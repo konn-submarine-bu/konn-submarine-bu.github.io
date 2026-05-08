@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "Hello World",
     "slug": "hello-world",
     "date": "2026-05-08",
@@ -8,6 +9,7 @@
     "excerpt": "The first post, marking a quiet beginning."
   },
   {
+    "id": 2,
     "title": "Git Cheatsheet",
     "slug": "git-cheatsheet",
     "date": "2026-05-08",
